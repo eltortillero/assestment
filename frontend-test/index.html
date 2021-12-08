@@ -20,39 +20,23 @@
 <body>
     <section class="main-body">
         <!-- ! @ may add a bunch of inputs over here -->
+
         <!-- * @ table container -->
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="loader" class="loader-container">
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="legend">
+                            Loading ...
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table" id="main-table">
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

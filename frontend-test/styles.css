@@ -11,3 +11,29 @@ body {
 .debug {
     border: 1px solid black;
 }
+
+.loader-container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loader-container > .spinner-grow {
+    margin-bottom: 3em;
+}
+
+.loader-container > .legend {
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+.flag {
+    width: auto;
+    height: 90px;
+    object-fit: cover;
+    -o-object-fit: cover;
+    object-position: center;
+    -o-object-position: center;
+}
