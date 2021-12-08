@@ -110,8 +110,7 @@ function build_table(table) {
                 language: reduceToString(extractValuesFromKeys(country.languages), "No official language"),
                 population: country.population,
                 flag_image: country.flags.svg,
-            }))
-            // .sort((a,b) => a.official_name.localeCompare(b.official_name))
+            })).sort((a,b) => a.official_name.localeCompare(b.official_name))
         );
 
     build_table(country_list);
