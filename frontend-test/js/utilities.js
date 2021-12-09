@@ -72,7 +72,7 @@ var buildDefaultTable = function buildDefaultTable(country_list) {
     </thead>
   <tbody>
     ${country_list.map((country_row, k) => `
-        <tr>
+        <tr class="row__with_pointer table--row" onclick="fetch_border_details('${country_row.official_name}')">
             <th scope="row">${k + 1}</th>
             ${Object.values(country_row).map((value) => `
                   <td>
@@ -106,3 +106,6 @@ async function retrieveSpanishContext(country_code) {
         .then((response_data) => response_data[0].translations.spa.official);
 }
 
+var log = function log(x) {
+    console.log(x)
+}

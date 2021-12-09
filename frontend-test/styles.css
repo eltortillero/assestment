@@ -113,3 +113,7 @@ body {
     margin-top: 2em;
     margin-bottom: 1.5em;
 }
+.google-maps-frame {
+    height: 40vh;
+    width: 100%;
+}

@@ -31,3 +31,30 @@ function get_borders(country_name) {
         window.alert(`${country_name} has no borders`);
     }
 }   
+
+async function fetch_border_details(country_name) {
+    const data = await fetch(endpoints.country_endpoint + country_name)
+    .then((response) => (response.json()))
+    .catch((err) => console.log(err))
+    .then((response_data) => response_data);
+    invoke_dialog_with_map(country_name,data);
+}
+
+function invoke_dialog_with_map(country_name, data) {
+    const final_html  = data.extract_html + `<div id="googleMap" class="google-maps-frame"></div>`;
+    bootbox.alert({
+        message:final_html,
+        size:'lg',
+        title:country_name
+    })
+    initMap(data);
+}
+
+function initMap({coordinates}) {
+    const map_reference = document.getElementById("googleMap");
+    let map;
+    map = new google.maps.Map(map_reference, {
+        center: { lat: coordinates.lat, lng: coordinates.lon },
+        zoom: 4,
+    });
+}
