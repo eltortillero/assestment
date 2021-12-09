@@ -17,3 +17,17 @@ function invoke_dialog(html, country_name) {
         title: country_name
     });
 }
+
+
+function get_borders(country_name) {
+    const country_raw_data = raw_country_list.find((country) => country.name.official === country_name);
+    const has_borders = checkIfNullish(country_raw_data.borders);
+    if(has_borders) {
+        setCountryTitle(country_name);
+        getCountryList(country_raw_data.borders);
+        countryDisplayer.scrollIntoView({behavior:"smooth"});
+    } else {
+        setCountryTitle(null);
+        window.alert(`${country_name} has no borders`);
+    }
+}   

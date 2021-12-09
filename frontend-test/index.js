@@ -1,10 +1,12 @@
 console.log("hello world");
 // * @ html elements
-const tableHTMLELEMENT = document.getElementById("main-table");
-const loaderHTMLELEMENT = document.getElementById("loader");
+var tableHTMLELEMENT = document.getElementById("main-table");
+var loaderHTMLELEMENT = document.getElementById("loader");
+var bordersTableHTMLElement = document.getElementById("borders-table");
+var countryDisplayer = document.getElementById("selected-country-displayer");
 
 // * @ regex for detecting a image
-const valid_image_url = /^(http(s?):)([/|.|\w|\s|-])*\.(?:svg)/g;
+var valid_image_url = /^(http(s?):)([/|.|\w|\s|-])*\.(?:svg)/g;
 
 loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, false);
 function build_table(table) {
@@ -18,13 +20,19 @@ function build_table(table) {
                     ${column_name}
                 </th>`;
         }).reduce((p, c) => p + c)}
+        <th>
+            information
+        </th>
+        <th>
+            borders
+        </th>
         </tr>
     </thead>`;
     const tbody = `<tbody> 
             ${table.map((row, k) => {
             return `
      
-                    <tr onclick="fetch_details('${row.official_name}')" class="table--row row__with_pointer">
+                    <tr class="table--row row__with_pointer">
                         <th scope="row"> 
                             ${k + 1}
                         </th> 
@@ -41,7 +49,17 @@ function build_table(table) {
                             </td> 
                             `;
                     }).reduce((p, c) => p + c)
-                }            
+                }   
+                        <td class="text-center">
+                            <button type="button" class="wk-button button--red" onclick="fetch_details('${row.official_name}')"> 
+                                wiki
+                            </button>
+                        </td>
+                        <td class="text-center"> 
+                             <button type="button" class="wk-button button--blue" onclick="get_borders( '${ row.official_name}' )"> 
+                                fronteras
+                             </button>
+                        </td>         
                     </tr>`
         }).reduce((p, c) => p + c)
         }
@@ -60,21 +78,17 @@ function build_table(table) {
     const country_list = await fetch(endpoints.countries_endpoint).then((response) => response.json())
         .catch((err) => console.log(err))
         // * @ transform the data into the given data pattern
-        .then((parsed_response) =>
-            parsed_response.map((country) => ({
-                official_name: country.name.official,
-                capital: reduceToString(country.capital, "No capital city"),
-                region: country.region,
-                language: reduceToString(extractValuesFromKeys(country.languages), "No official language"),
-                population: country.population,
-                flag_image: country.flags.svg,
-            })).sort((a, b) => a.official_name.localeCompare(b.official_name))
+        .then((parsed_response) => {
+            const raw_data = parsed_response;
+            raw_country_list = parsed_response;
+            return raw_data.map(standardViewModel).sort(filterAscByName);
+        }
         );
 
     build_table(country_list);
     loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
     let options = {
-        numberPerPage: 10, //Cantidad de datos por pagina
+        numberPerPage: 8, //Cantidad de datos por pagina
         goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
         pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
     };
@@ -83,8 +97,6 @@ function build_table(table) {
     };
     loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
     paginate.init('#main-table', options, filterOptions);
+    standarized_country_list = raw_country_list.map((country) => ({...country, standard_search_code:[country.cca2, country.cca3, country.cioc]}))
 })();
-
-
-
 

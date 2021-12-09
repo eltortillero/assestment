@@ -84,3 +84,31 @@ body {
     font-size:1.25em;
     font-weight: bold;
 }
+
+.wk-button {
+    transition: all ease 300ms;
+    border: none;
+    font-size: 1em;
+    font-weight: 500;
+    padding: .5em 1.25em;
+    line-height: 1em;
+    border-radius: .25em;
+}
+
+.button--red {
+    background-color: rgb(255, 88, 88);
+    color: white;
+}
+.button--red:hover {
+    background-color: rgb(250, 8, 8);
+}
+.button--blue {
+    color: white;
+    background-color: rgb(88, 88, 255);
+}
+.button--blue:hover {
+    background-color: rgb(8, 8, 255);
+}
+.m-t--2 {
+    margin: 2em 0 1.5em 0 !important;
+}
