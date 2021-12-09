@@ -26,33 +26,35 @@ var reduceToString = function reduceToString(str_arr, default_message) {
 /**
  * @description this function loading cycler 
  * @param loaderElement HTMLElement
- * @param htmlElement HTMLElement
+ * @param tableElement HTMLElement
  * @param state_to_toggle boolean
  */
 
-var loadingCycleToggler = function loadingCycleToggler(loaderElement, htmlElement, state_to_toggle) {
+var loadingCycleToggler = function loadingCycleToggler(loaderElement, tableElement, state_to_toggle) {
     loaderElement.hidden = state_to_toggle;
-    htmlElement.hidden = !state_to_toggle;
+    tableElement.hidden = !state_to_toggle;
 }
 
 
-var getCountryList = function getCountryList(borders) {
+var getCountryList = async function getCountryList(borders) {
     const contriesOnBorder = [];
     for (let j = 0; j < borders.length; j++) {
         const spelling = borders[j];
-        contriesOnBorder.push(getByAltSpelling(spelling));
+        contriesOnBorder.push(await getByAltSpelling(spelling));
     }
-    border_country_list = contriesOnBorder.map(standardViewModel).sort(filterAscByName);
+    border_country_list = contriesOnBorder.map(translatedTableModel).sort(filterAscByName);
     buildDefaultTable(border_country_list);
+
 }
 
 var getClickedCountry = function getClickedCountry(country_name) {
     const _clicked = raw_country_list.find((country) => country.name.official === country_name);
 }
 
-var getByAltSpelling = function getByAltSpelling(spelling) {
+var getByAltSpelling = async function getByAltSpelling(spelling) {
     const searchedCountry = standarized_country_list.find((country) => country.standard_search_code.includes(spelling));
-    return searchedCountry;
+    const translated_name = await retrieveSpanishContext(searchedCountry.standard_search_code[0]);
+    return { ...searchedCountry, translated_name: translated_name };
 }
 
 
@@ -72,11 +74,14 @@ var buildDefaultTable = function buildDefaultTable(country_list) {
     ${country_list.map((country_row, k) => `
         <tr>
             <th scope="row">${k + 1}</th>
-            ${
-                Object.values(country_row).map((values) => `
-                  <td>${values}</td>
+            ${Object.values(country_row).map((value) => `
+                  <td>
+                    ${valid_image_url.test(value) ? `<img src='${value}' class="img-fluid">` : value
+        }
+                  </td>
                 `).reduce(reduceForHTML)
-             }
+        }
+          
         </tr>
 
     `).reduce(reduceForHTML)}
@@ -84,12 +89,20 @@ var buildDefaultTable = function buildDefaultTable(country_list) {
 }
 
 var setCountryTitle = function setCountryTitle(country_name) {
-    if(checkIfNullish(country_name)) {
+    if (checkIfNullish(country_name)) {
         countryDisplayer.innerHTML = `Contries that have a border with ${country_name}`;
     } else {
-        const HTMLElements = [countryDisplayer,bordersTableHTMLElement];
+        const HTMLElements = [countryDisplayer, bordersTableHTMLElement];
         HTMLElements.map((element) => {
             element.innerHTML = "";
         });
     }
 }
+
+async function retrieveSpanishContext(country_code) {
+    return fetch(endpoints.translated_country + country_code)
+        .then((res) => res.json())
+        .catch((err) => console.log(err))
+        .then((response_data) => response_data[0].translations.spa.official);
+}
+

@@ -110,5 +110,6 @@ body {
     background-color: rgb(8, 8, 255);
 }
 .m-t--2 {
-    margin: 2em 0 1.5em 0 !important;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
 }

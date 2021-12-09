@@ -86,7 +86,7 @@ function build_table(table) {
         );
 
     build_table(country_list);
-    loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
+    loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, true);
     let options = {
         numberPerPage: 8, //Cantidad de datos por pagina
         goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
@@ -95,7 +95,6 @@ function build_table(table) {
     let filterOptions = {
         el:'#searchBox' //Caja de texto para filtrar, puede ser una clase o un ID
     };
-    loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
     paginate.init('#main-table', options, filterOptions);
     standarized_country_list = raw_country_list.map((country) => ({...country, standard_search_code:[country.cca2, country.cca3, country.cioc]}))
 })();
