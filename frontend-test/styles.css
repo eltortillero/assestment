@@ -51,3 +51,36 @@ body {
 .table-container {
     transition: all ease 300ms;
 }
+
+.filter {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.filter > input {
+    padding: .5em .25em;
+    transition: ease 300ms;
+    margin: .5em 0;
+    border: none;
+    border-bottom: 1px solid rgb(43, 43, 43);
+    background-color: rgb(252, 252, 252);
+    margin-bottom: 1rem;
+}
+
+.filter > input:focus {
+    padding: .5em .5em;
+    transition: ease-in 150ms;
+    background-color: rgb(230, 230, 230);
+    outline: none;
+    border-bottom: 1px solid rgb(97, 97, 97);
+}
+.filter > input:focus::placeholder {
+    transition: all ease 300ms;
+    color: rgb(190, 190, 190);
+}
+.filter > label { 
+    padding: 0;
+    margin: 0;
+    font-size:1.25em;
+    font-weight: bold;
+}

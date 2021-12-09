@@ -25,21 +25,31 @@
     <link rel="stylesheet" href="css/paginate.css">
     <link rel="stylesheet" href="css/ligne.css">
 
-
+    <!-- * @ pluggins and js -->
+    <script type="text/javascript" src="js/paginate.js"></script>
+    <!-- * @ enpoints global variables -->
+    <script src="./js/endpoints.js"></script>
+    <!-- * @ global utility functions to handle data -->
+    <script src="./js/utilities.js"></script>
+    <!-- * @ global click functions -->
+    <script src="./js/click_functions.js"></script>
     <title>Frontend Test</title>
 </head>
 
 <body>
     <section class="main-body">
         <!-- ! @ may add a bunch of inputs over here -->
-        <!-- <div class="panel">
-            <div class="body">
-                <div class="input-group">
-                    <label for="searchBox">Filtrar</label>
-                    <input type="search" id="searchBox" placeholder="Filtrar...">
+        <section class="container">
+            <section class="row">
+                <div class="col-md-12">
+                    <div class="filter">
+                        <label for="searchBox">Filter by any field</label>
+                        <input type="search" id="searchBox" placeholder="What are you looking for?">
+                    </div>
                 </div>
-            </div>
-        </div> -->
+            </section>
+        </section>
+
         <!-- * @ table container -->
         <div class="container">
             <div class="row">
@@ -61,13 +71,7 @@
         </div>
         <!-- * @ end table container -->
     </section>
-    <script type="text/javascript" src="js/paginate.js"></script>
-    <!-- * @ enpoints global variables -->
-    <script src="./js/endpoints.js"></script>
-    <!-- * @ global utility functions to handle data -->
-    <script src="./js/utilities.js"></script>
-    <!-- * @ global click functions -->
-    <script src="./js/click_functions.js"></script>
+
     <!-- * @ main file that controls the index.html flow and behaviour -->
     <script src="./index.js"></script>
 

@@ -1,4 +1,3 @@
-'use-strict';
 console.log("hello world");
 // * @ html elements
 const tableHTMLELEMENT = document.getElementById("main-table");
@@ -83,7 +82,7 @@ function build_table(table) {
         el:'#searchBox' //Caja de texto para filtrar, puede ser una clase o un ID
     };
     loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
-    paginate.init('#main-table', options, );
+    paginate.init('#main-table', options, filterOptions);
 })();
 
 
