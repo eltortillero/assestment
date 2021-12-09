@@ -11,62 +11,46 @@ loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, false);
 function build_table(table) {
     const columns = Object.keys(table[0])
     const full_columns = (["#"].concat(columns));
-    // const thead =
-    //     `<thead> 
-    //     <tr>
-    //         ${full_columns.map((column_name) => {
-    //         return `<th scope="col">
-    //                 ${column_name}
-    //             </th>`;
-    //     }).reduce((p, c) => p + c)}
-    //     </tr>
-    // </thead>`;
+    const thead =
+        `<thead> 
+        <tr>
+            ${full_columns.map((column_name) => {
+            return `<th scope="col">
+                    ${column_name}
+                </th>`;
+        }).reduce((p, c) => p + c)}
+        </tr>
+    </thead>`;
     const tbody = `<tbody> 
             ${table.map((row, k) => {
-           return `
-                ${(2 + 2)
-            < {/* tr>
-                    <th>USER ID</th>
-                    <th>ID</th>
-                    <th>TITTLE</th>
-                    <th>COMPLETED</th>
-                </tr> */}
-            }
-                    <tr> 
-                        ${full_columns.map((column_name) => {
-
-                     return `
-                            <th> 
-                                ${column_name.toUpperCase()}
-                            </th> 
-                    `}).reduce((p,c) => p + c)
-            }
-                    <tr>
+            return `
+     
                     <tr onclick="fetch_details('${row.official_name}')" class="table--row row__with_pointer">
                         <th scope="row"> 
                             ${k + 1}
                         </th> 
                         ${Object.keys(row)
-                .map((key) => {
-                    const value = row[key];
-                    const is_image = valid_image_url.test(value);
-                    return `
-                            <th>
+                    .map((key) => {
+                        const value = row[key];
+                        const is_image = valid_image_url.test(value);
+                        return `
+                            <td>
                                 ${is_image ? `
                                         <img src="${value}" class="img-fluid"> 
                                     ` : value
-                        } 
-                            </th> 
+                            } 
+                            </td> 
                             `;
-                }).reduce((p, c) => p + c)
-            }            
+                    }).reduce((p, c) => p + c)
+                }            
                     </tr>`
-    }).reduce((p, c) => p + c)
+        }).reduce((p, c) => p + c)
         }
     </tbody>`
 
 
-    tableHTMLELEMENT.innerHTML = tbody;
+    // thead
+    tableHTMLELEMENT.innerHTML = (thead + tbody);
     tableHTMLELEMENT.hidden = false;
 }
 /**
@@ -90,6 +74,16 @@ function build_table(table) {
 
     build_table(country_list);
     loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
+    let options = {
+        numberPerPage: 10, //Cantidad de datos por pagina
+        goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
+        pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
+    };
+    let filterOptions = {
+        el:'#searchBox' //Caja de texto para filtrar, puede ser una clase o un ID
+    };
+    loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
+    paginate.init('#main-table', options, );
 })();
 
 
