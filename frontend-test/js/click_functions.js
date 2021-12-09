@@ -41,13 +41,14 @@ async function fetch_border_details(country_name) {
 }
 
 function invoke_dialog_with_map(country_name, data) {
-    const final_html  = data.extract_html + `<div id="googleMap" class="google-maps-frame"></div>`;
+    const has_coordinates = checkIfNullish(data?.coordinates);
+    const final_html  = data.extract_html + ((has_coordinates) ? `<div id="googleMap" class="google-maps-frame"></div>` : "Sorry i didnt find the coordinates for this country");
     bootbox.alert({
         message:final_html,
         size:'lg',
         title:country_name
     })
-    initMap(data);
+    if(has_coordinates) initMap(data);
 }
 
 function initMap({coordinates}) {
