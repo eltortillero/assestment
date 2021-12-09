@@ -1,7 +1,5 @@
-
+'use-strict';
 console.log("hello world");
-
-
 // * @ html elements
 const tableHTMLELEMENT = document.getElementById("main-table");
 const loaderHTMLELEMENT = document.getElementById("loader");
@@ -9,24 +7,41 @@ const loaderHTMLELEMENT = document.getElementById("loader");
 // * @ regex for detecting a image
 const valid_image_url = /^(http(s?):)([/|.|\w|\s|-])*\.(?:svg)/g;
 
-// * @ endpoints
-loadingCycleToggler(loaderHTMLELEMENT,tableHTMLELEMENT,false);
+loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, false);
 function build_table(table) {
     const columns = Object.keys(table[0])
     const full_columns = (["#"].concat(columns));
-    const thead =
-        `<thead> 
-        <tr>
-            ${full_columns.map((column_name) => {
-            return `<th scope="col">
-                    ${column_name}
-                </th>`;
-        }).reduce((p, c) => p + c)}
-        </tr>
-    </thead>`;
+    // const thead =
+    //     `<thead> 
+    //     <tr>
+    //         ${full_columns.map((column_name) => {
+    //         return `<th scope="col">
+    //                 ${column_name}
+    //             </th>`;
+    //     }).reduce((p, c) => p + c)}
+    //     </tr>
+    // </thead>`;
     const tbody = `<tbody> 
             ${table.map((row, k) => {
-        return `
+           return `
+                ${(2 + 2)
+            < {/* tr>
+                    <th>USER ID</th>
+                    <th>ID</th>
+                    <th>TITTLE</th>
+                    <th>COMPLETED</th>
+                </tr> */}
+            }
+                    <tr> 
+                        ${full_columns.map((column_name) => {
+
+                     return `
+                            <th> 
+                                ${column_name.toUpperCase()}
+                            </th> 
+                    `}).reduce((p,c) => p + c)
+            }
+                    <tr>
                     <tr onclick="fetch_details('${row.official_name}')" class="table--row row__with_pointer">
                         <th scope="row"> 
                             ${k + 1}
@@ -36,12 +51,12 @@ function build_table(table) {
                     const value = row[key];
                     const is_image = valid_image_url.test(value);
                     return `
-                            <td>
+                            <th>
                                 ${is_image ? `
                                         <img src="${value}" class="img-fluid"> 
                                     ` : value
                         } 
-                            </td> 
+                            </th> 
                             `;
                 }).reduce((p, c) => p + c)
             }            
@@ -51,7 +66,7 @@ function build_table(table) {
     </tbody>`
 
 
-    tableHTMLELEMENT.innerHTML = (thead + tbody)
+    tableHTMLELEMENT.innerHTML = tbody;
     tableHTMLELEMENT.hidden = false;
 }
 /**
@@ -74,7 +89,7 @@ function build_table(table) {
         );
 
     build_table(country_list);
-    loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT,!false);
+    loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, !false);
 })();
 
 
