@@ -30,10 +30,24 @@ body {
     letter-spacing: 1px;
 }
 .flag {
-    width: auto;
+    width: 90px;
     height: 90px;
     object-fit: cover;
     -o-object-fit: cover;
     object-position: center;
     -o-object-position: center;
+}
+.row__with_pointer {
+    cursor: pointer;
+}
+.table--row {
+    background-color: inherit;
+}
+.table--row:hover {
+    transition: ease 300ms;
+    background-color: rgb(243, 243, 243);
+}
+/* * @ pretty sure this wont work may delete laterflag */
+.table-container {
+    transition: all ease 300ms;
 }
