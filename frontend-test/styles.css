@@ -109,6 +109,13 @@ body {
 .button--blue:hover {
     background-color: rgb(8, 8, 255);
 }
+.button--green {
+    background-color: rgb(108, 236, 108);
+    color: white;
+}
+.button--green:hover {
+    background-color: rgb(75, 219, 75);
+}
 .m-t--2 {
     margin-top: 2em;
     margin-bottom: 1.5em;

@@ -59,3 +59,20 @@ function initMap({coordinates}) {
         zoom: 4,
     });
 }
+
+function get_languages_for_main_country(country_name) {
+    const country = raw_country_list.find((country) => country.name.official ===country_name);
+    let html;
+    if(checkIfNullish(country.languages)) {
+        let languages = Object.keys(country.languages).map((key) => country.languages[key]);
+        languages = languages.length > 1 ? languages.sort(compareAsc) : languages;
+        html = `
+            <ul>
+                ${ languages.map((language) => `<li> ${language} </li>`).reduce(reduceForHTML) }
+            </ul>
+        `
+    } else {
+        html = "<h5 class='h5'>This country does not have official languages<h5>"
+    }
+    invoke_dialog(html,`${country_name} official language(s)`);
+}

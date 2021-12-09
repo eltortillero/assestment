@@ -44,7 +44,9 @@ function build_table(table) {
                             <td>
                                 ${is_image ? `
                                         <img src="${value}" class="img-fluid"> 
-                                    ` : value
+                                    ` : (key === "language") ? 
+                                    `<button type="button" class="wk-button button--green" onclick="get_languages_for_main_country('${row.official_name}')"> ${value} </button> ` : 
+                                    value
                             } 
                             </td> 
                             `;

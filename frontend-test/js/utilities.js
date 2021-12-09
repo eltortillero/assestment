@@ -63,7 +63,7 @@ var checkIfNullish = (toCheck) => ((toCheck !== null) && (toCheck !== undefined)
 
 var buildDefaultTable = function buildDefaultTable(country_list) {
 
-    const columns = ["#", ...Object.keys(country_list[0])];
+    const columns = ["#", ...Object.keys(country_list[0]), "details and map"];
     bordersTableHTMLElement.innerHTML = `
     <thead>
         <tr>
@@ -71,16 +71,23 @@ var buildDefaultTable = function buildDefaultTable(country_list) {
         </tr>
     </thead>
   <tbody>
-    ${country_list.map((country_row, k) => `
-        <tr class="row__with_pointer table--row" onclick="fetch_border_details('${country_row.official_name}')">
+    ${country_list.map((row, k) => `
+        <tr class="row__with_pointer table--row">
             <th scope="row">${k + 1}</th>
-            ${Object.values(country_row).map((value) => `
-                  <td>
-                    ${valid_image_url.test(value) ? `<img src='${value}' class="img-fluid">` : value
-        }
+
+            ${Object.keys(row).map((key) => {
+        const value = row[key];
+        return `<td>
+                    ${valid_image_url.test(value) ? `<img src='${value}' class="img-fluid">` : (key === "language") ?
+                `<button type="button" class="wk-button button--green" onclick="get_languages_for_main_country('${row.official_name}')"> ${value} </button> ` :
+                value
+            }
                   </td>
-                `).reduce(reduceForHTML)
-        }
+                `
+             })
+            .reduce(reduceForHTML)
+            }
+            <td> <button type="button" class="wk-button button--red"  onclick="fetch_border_details('${row.official_name}')"> details </button> </td>
           
         </tr>
 
