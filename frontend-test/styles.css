@@ -55,9 +55,9 @@ body {
 .filter {
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
 }
-.filter > input {
+.filter .search > input {
     padding: .5em .25em;
     transition: ease 300ms;
     margin: .5em 0;
@@ -67,22 +67,32 @@ body {
     margin-bottom: 1rem;
 }
 
-.filter > input:focus {
+.filter .search > input:focus {
     padding: .5em .5em;
     transition: ease-in 150ms;
     background-color: rgb(230, 230, 230);
     outline: none;
     border-bottom: 1px solid rgb(97, 97, 97);
 }
-.filter > input:focus::placeholder {
+.filter .search > input:focus::placeholder {
     transition: all ease 300ms;
     color: rgb(190, 190, 190);
 }
-.filter > label { 
+.filter .search{
     padding: 0;
     margin: 0;
     font-size:1.25em;
     font-weight: bold;
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+.filter .selector {
+    padding: .75em 0;
+    display: flex;
+    justify-content:flex-end;
+    flex-direction: column;
 }
 
 .wk-button {

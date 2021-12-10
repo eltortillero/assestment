@@ -48,14 +48,14 @@ function invoke_dialog_with_map(country_name, data) {
         size:'lg',
         title:country_name
     })
-    if(has_coordinates) initMap(data);
+    if(has_coordinates) initMap(data.coordinates);
 }
 
-function initMap({coordinates}) {
+function initMap(coordinates) {
     const map_reference = document.getElementById("googleMap");
     let map;
     map = new google.maps.Map(map_reference, {
-        center: { lat: coordinates.lat, lng: coordinates.lon },
+        center: { lat: coordinates?.lat, lng: coordinates?.lon },
         zoom: 4,
     });
 }

@@ -3,14 +3,15 @@ console.log("hello world");
 var tableHTMLELEMENT = document.getElementById("main-table");
 var loaderHTMLELEMENT = document.getElementById("loader");
 var bordersTableHTMLElement = document.getElementById("borders-table");
+var fieldFilterHTMLElement = document.getElementById("field_filter");
 var countryDisplayer = document.getElementById("selected-country-displayer");
-
 // * @ regex for detecting a image
 var valid_image_url = /^(http(s?):)([/|.|\w|\s|-])*\.(?:svg)/g;
 
 loadingCycleToggler(loaderHTMLELEMENT, tableHTMLELEMENT, false);
 function build_table(table) {
-    const columns = Object.keys(table[0])
+    const columns = Object.keys(table[0]);
+    filter_options = columns;
     const full_columns = (["#"].concat(columns));
     const thead =
         `<thead> 
@@ -59,7 +60,7 @@ function build_table(table) {
                         </td>
                         <td class="text-center"> 
                              <button type="button" class="wk-button button--blue" onclick="get_borders( '${ row.official_name}' )"> 
-                                fronteras
+                                borders
                              </button>
                         </td>         
                     </tr>`
@@ -94,10 +95,8 @@ function build_table(table) {
         goBar: true, //Barra donde puedes digitar el numero de la pagina al que quiere ir
         pageCounter: true, //Contador de paginas, en cual estas, de cuantas paginas
     };
-    let filterOptions = {
-        el:'#searchBox' //Caja de texto para filtrar, puede ser una clase o un ID
-    };
-    paginate.init('#main-table', options, filterOptions);
+    paginate.init('#main-table', options);
     standarized_country_list = raw_country_list.map((country) => ({...country, standard_search_code:[country.cca2, country.cca3, country.cioc]}))
+    console.log(filter_options)
 })();
 

@@ -116,3 +116,42 @@ async function retrieveSpanishContext(country_code) {
 var log = function log(x) {
     console.log(x)
 }
+
+var createOptions = function createOptions(columns,HTMLElement) {
+    const black_listed_fields = ["language","flag_image"];
+
+    const options = columns.filter((column) => black_listed_fields.includes(column))
+    console.log(options)
+    
+    // columns.map((column) => {
+    //     return  {
+
+    //     }
+    // });
+}
+function provideFilterName(selector_name) {
+    switch (selector_name) {
+        case selector_name === "official_name":
+            return {
+                value:selector_name,
+                name:"Official name",
+            }
+        case selector_name === "capital":
+            return {
+                value:selector_name,
+                name:"Capital"
+            }
+        case selector_name === "region":
+            return {
+                value:selector_name,
+                name:"Region"
+            }
+        case selector_name === "population":
+            return {
+                value:selector_name,
+                name:"Population"
+            }
+        default:
+            break;
+    }
+}

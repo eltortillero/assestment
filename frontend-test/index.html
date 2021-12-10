@@ -46,8 +46,17 @@
             <section class="row">
                 <div class="col-md-12">
                     <div class="filter">
-                        <label for="searchBox">Filter by any field</label>
-                        <input type="search" id="searchBox" placeholder="What are you looking for?">
+                            <div class="search">
+                                <input type="search" id="searchBox" placeholder="What are you looking for?">
+                            </div>      
+                            <div class="selector">
+                                <select name="field_filter" id="field_filter">
+                                    <option value="null" selected>
+                                        Selecciona un filtro
+                                    </option>
+
+                                </select>
+                            </div>              
                     </div>
                 </div>
             </section>
